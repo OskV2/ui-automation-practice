@@ -1,5 +1,6 @@
 package pl.globallogic;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Tests extends BaseTest {
@@ -7,7 +8,12 @@ public class Tests extends BaseTest {
     //  Verify successful Item Search (verification - check if first result item title is visible)
     @Test
     public void verifySuccessfulItemSearch() {
+        String searchQuery = "Blouse";
 
+        homePage.visit(host);
+        homePage.search(searchQuery);
+
+        Assert.assertTrue(resultPage.isSearchSuccessful(searchQuery));
     }
 
     //  Verify searching with invalid query
@@ -17,10 +23,6 @@ public class Tests extends BaseTest {
     //  Verify empty search query processing
     @Test
     public void verifyEmptySearchQueryProcessing() {}
-
-    //  Verify search result item filtering
-    @Test
-    public void verifySearchResultItemFiltering() {}
 
     //  Verify search result item sorting - by price
     @Test

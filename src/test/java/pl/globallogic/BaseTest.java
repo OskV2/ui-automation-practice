@@ -10,7 +10,9 @@ import org.testng.annotations.BeforeMethod;
 public class BaseTest {
 
     WebDriver driver;
-    protected String host = "www.automationpractice.pl";
+    protected String host = "http://www.automationpractice.pl";
+    HomePage homePage;
+    SearchResultPage resultPage;
 
     @BeforeMethod
     public void testSetup() {
@@ -22,6 +24,9 @@ public class BaseTest {
 
         driver.manage().window().setPosition(new Point(2000, 0));
         driver.manage().window().maximize();
+
+        homePage = new HomePage(driver, host);
+        resultPage = new SearchResultPage(driver);
     }
 
     @AfterMethod

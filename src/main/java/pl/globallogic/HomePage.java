@@ -7,6 +7,7 @@ public class HomePage extends BasePage {
 
     private final String host;
     private final By searchFieldLocator = By.id("search_query_top");
+    private final By searchButtonLocator = By.name("submit_search");
 
     public HomePage(WebDriver driver, String host) {
         super(driver);
@@ -14,6 +15,7 @@ public class HomePage extends BasePage {
     }
 
     public void search(String searchQuery) {
-
+        type(searchFieldLocator, searchQuery);
+        click(searchButtonLocator);
     }
 }
