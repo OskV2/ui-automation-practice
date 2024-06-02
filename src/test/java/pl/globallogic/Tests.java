@@ -18,15 +18,38 @@ public class Tests extends BaseTest {
 
     //  Verify searching with invalid query
     @Test
-    public void verifySearchingWithInvalidQuery() {}
+    public void verifySearchingWithInvalidQuery() {
+        String searchQuery = "asd";
+
+        homePage.visit(host);
+        homePage.search(searchQuery);
+
+        Assert.assertTrue(resultPage.isSearchQueryInvalid(searchQuery));
+    }
 
     //  Verify empty search query processing
     @Test
-    public void verifyEmptySearchQueryProcessing() {}
+    public void verifyEmptySearchQueryProcessing() {
+        String searchQuery = "";
+
+        homePage.visit(host);
+        homePage.search(searchQuery);
+
+        Assert.assertTrue(resultPage.isSearchQueryEmpty());
+    }
 
     //  Verify search result item sorting - by price
     @Test
-    public void verifySearchResultItemSorting() {}
+    public void verifySearchResultItemSorting() {
+        String searchQuery = "Shoes";
+
+        homePage.visit(host);
+        homePage.search(searchQuery);
+        resultPage.selectSortingOption(1); //  Passed number is index of chosen option - this option is second option element in DOM in this select
+        //  resultPage.selectSortingOption("price:asc"); It can also be made with value of option instead of index
+
+        Assert.assertTrue(resultPage.isSearchResultSortedProperly());
+    }
 
     //  Verify if first item from results can be added to cart from item details page
     @Test
