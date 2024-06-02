@@ -3,6 +3,7 @@ package pl.globallogic;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ public class SearchResultPage extends BasePage {
     private final By firstItemInResultNameLocator = By.xpath("//*[@id=\"center_column\"]/ul/li/div/div[2]/h5/a");
     private final By alertWarningLocator = By.className("alert-warning");
     private final By selectElementLocator = By.id("selectProductSort");
+    private final By firstItemLocator = By.xpath("/html/body/div/div[2]/div/div[3]/div[2]/ul/li/div/div[1]/div/a[1]/img");
+    private final By firstElementDetailsLinkLocator = By.xpath("/html/body/div/div[2]/div/div[3]/div[2]/ul/li/div/div[2]/div[2]/a");
     private final By firstItemPriceLocator = By.xpath("//*[@id=\"center_column\"]/ul/li[1]/div/div[2]/div[1]/span");
     private final By secondItemPriceLocator = By.xpath("//*[@id=\"center_column\"]/ul/li[2]/div/div[2]/div[1]/span[2]");
     private final By thirdItemPriceLocator = By.xpath("//*[@id=\"center_column\"]/ul/li[3]/div/div[2]/div[1]/span");
@@ -29,7 +32,7 @@ public class SearchResultPage extends BasePage {
         return findElementBy(firstItemInResultNameLocator).getText().toLowerCase().contains(searchQuery.toLowerCase());
     }
 
-    public boolean isSearchQueryInvalid(String searchQuery) {
+    public boolean isSearchQueryInvalid() {
         return findElementBy(alertWarningLocator).getText().contains(INVALID_SEARCH_QUERY_ERROR);
     }
 
@@ -59,5 +62,15 @@ public class SearchResultPage extends BasePage {
         Collections.sort(sortedPrices);
 
         return prices.equals(sortedPrices);
+    }
+
+    public void goToFirstProductDetailsPage() {
+        Actions actions = new Actions(driver);
+        WebElement firstProduct = findElementBy(firstItemLocator);
+
+        actions.moveToElement(firstProduct).perform();
+        pause(1);
+        click(firstElementDetailsLinkLocator);
+        pause(1);
     }
 }

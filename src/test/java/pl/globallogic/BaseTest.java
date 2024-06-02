@@ -13,6 +13,8 @@ public class BaseTest {
     protected String host = "http://www.automationpractice.pl";
     HomePage homePage;
     SearchResultPage resultPage;
+    DetailsPage detailsPage;
+    CartPage cartPage;
 
     @BeforeMethod
     public void testSetup() {
@@ -27,6 +29,8 @@ public class BaseTest {
 
         homePage = new HomePage(driver, host);
         resultPage = new SearchResultPage(driver);
+        detailsPage = new DetailsPage(driver);
+        cartPage = new CartPage(driver);
     }
 
     @AfterMethod
