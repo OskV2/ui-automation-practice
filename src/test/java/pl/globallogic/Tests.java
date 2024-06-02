@@ -16,6 +16,16 @@ public class Tests extends BaseTest {
         Assert.assertTrue(resultPage.isSearchSuccessful(searchQuery));
     }
 
+    @Test
+    public void verifySuccessfulItemSearchWithDifferentQuery() {
+        String searchQuery = "Shoes";
+
+        homePage.visit(host);
+        homePage.search(searchQuery);
+
+        Assert.assertTrue(resultPage.isSearchSuccessful(searchQuery));
+    }
+
     //  Verify searching with invalid query
     @Test
     public void verifySearchingWithInvalidQuery() {
@@ -24,7 +34,7 @@ public class Tests extends BaseTest {
         homePage.visit(host);
         homePage.search(searchQuery);
 
-        Assert.assertTrue(resultPage.isSearchQueryInvalid(searchQuery));
+        Assert.assertTrue(resultPage.isSearchQueryInvalid());
     }
 
     //  Verify empty search query processing
@@ -53,11 +63,25 @@ public class Tests extends BaseTest {
 
     //  Verify if first item from results can be added to cart from item details page
     @Test
-    public void verifyIfFirstItemFromResultsCanBeAddedToCartFromItemDetailsPage() {}
+    public void verifyIfFirstItemFromResultsCanBeAddedToCartFromItemDetailsPage() {
+        String searchQuery = "Blouse";
+
+        homePage.visit(host);
+        homePage.search(searchQuery);
+
+        resultPage.goToFirstProductDetailsPage();
+
+        detailsPage.chooseColor();
+        detailsPage.addToCart();
+        detailsPage.goToCartAfterAddingToCart();
+
+        Assert.assertTrue(searchQuery.equals(cartPage.getFirstItemInCartName()));
+    }
 
     //  Verify if first item from results can be added to cart from search page
-    @Test
-    public void verifyIfFirstItemFromResultsCanBeAddedToCartFromSearchPage() {}
+    //  @Test
+    //  public void verifyIfFirstItemFromResultsCanBeAddedToCartFromSearchPage() {}
+    //  PRODUCT CANT BE ADDED FROM SEARCH PAGE BECAUSE THERE IS NOT ADD TO CART BUTTON BECAUSE PRODUCTS ARE AVAILABLE WITH MULTIPLE OPTIONS
 
     //  Verify first item from results can be removed from the cart
     @Test
