@@ -82,13 +82,4 @@ public class Tests extends BaseTest {
     //  @Test
     //  public void verifyIfFirstItemFromResultsCanBeAddedToCartFromSearchPage() {}
     //  PRODUCT CANT BE ADDED FROM SEARCH PAGE BECAUSE THERE IS NOT ADD TO CART BUTTON BECAUSE PRODUCTS ARE AVAILABLE WITH MULTIPLE OPTIONS
-
-    //  Verify first item from results can be removed from the cart
-    @Test
-    public void verifyFirstItemFromResultsCanBeRemovedFromTheCart() {}
-
-    //  Verify that item review is available on the items details page
-    @Test
-    public void verifyThatItemReviewIsAvailableOnTheItemsDetailsPage() {}
-
 }
